@@ -2,16 +2,11 @@
 
 echo "*************************************************************************"
 echo "Set DEM directory..."
-demDir=~/DEM/vfp
+demDir=data
 echo "DEM directory:  ${demDir}"
 
 echo "Prepare test directory..."
-testDir=tests
-
-if [ -d "/tmp" ];
-then
-	testDir=/tmp/tests; 
-fi;
+testDir=output/tests
 
 echo "test directory:  ${testDir}"
 
@@ -21,7 +16,7 @@ then
 fi;
 
 mkdir ${testDir};
-cp output/OpenLayers/Tests/Regacom_Tests_WGS84.html ${testDir}/
+
 
 echo "*************************************************************************"
 echo "Running 50cm LIDAR test..."
@@ -56,6 +51,15 @@ convert ${testDir}/2_New.ppm -transparent white -channel Alpha PNG32:${testDir}/
 rm ${testDir}/2_New.ppm
 rm ${testDir}/2_New.*cf
 
+echo "Original tests complete."
+
+
+exit
+
+
+echo "*************************************************************************"
+echo "Commencing REGACOM tests..."
+cp output/OpenLayers/Tests/Regacom_Tests_WGS84.html ${testDir}/
 
 echo "*************************************************************************"
 echo "Running 446 Mhz Antenna and UDT Clutter test..."
