@@ -137,7 +137,7 @@ int ReadSRTM(char *filename)
 			}
 
 			min_north=(int)(deg_north);
-			max_north=max_north+1;
+			max_north=min_north+1;
 
 			if (deg_west<0.0)
 				deg_west=-deg_west;
