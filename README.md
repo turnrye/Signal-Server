@@ -7,9 +7,9 @@ Some additional features and fixes by Aaron A. Collins, N9OZB
                                       Tom Hayward, KD7LXL
                                       Darcy Buskermolen, VA7DBI
 
-This server application will generate RF coverage predictions, producing either 2D profile plots (Point-to-Point) or 360 degree polar plots in WGS-84 projection as PPM Bitmaps.
+This server application will generate RF coverage predictions, producing either 2D profile plots (Point-to-Point) or 360 degree polar plots in WGS-84 projection as PPM Bitmaps. 
 
-For detailed information and historical reference data related to this project see the SPLAT! documentation. Propagation models added to this project have been sourced from reputable academic sources and all efforts have been taken to ensure their accurate implementation. Not all models are ITU ratified and you use them entirely at your own risk.
+For detailed information and historical reference data related to this project see the SPLAT! documentation. This SPLAT! fork used to power CloudRF.com from 2012 to 2016 before it was replaced with a purpose built engine. Propagation models added to this project have been sourced from reputable academic sources and all efforts have been taken to ensure their accurate implementation. Not all models are ITU ratified and you use them entirely at your own risk.
 
 WARNING: The accuracy of the output is directly proportional to the accuracy of the inputs and the time taken defining and validating them. 
 
@@ -56,60 +56,30 @@ Additional programs/scripts will be required to prepare inputs such as .hgt tile
 .kmz Google Earth Keyhole Markup Language, compressed
 ```
 
-## Preparations
-Check your C++ build environment with this HelloWorld application:
-
-main.cc
+## Install dependencies
+Assuming Debian / Ubuntu, this will fetch the core libraries needed to build it as well as an image library for manipulating outputs.
 ```
-#include <iostream>
-
-using namespace std;
-
-int main()
-{
-    cout << "Hello World!" << endl;
-    return 0;
-}
-```
-
-CMakeLists.txt
-```
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
-
-project(HelloWorld LANGUAGES CXX)
-
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-set(CMAKE_CXX_FLAGS "-O2")
-
-add_executable(HelloWorld main.cc)
-```
-
-```
-# cmake .
-# cmake --build .
-# ./HelloWorld
-=> HelloWorld!
+sudo apt-get install g++ cmake libbz2-dev imagemagick
 ```
 
 ## Installation
+Change into the source directory to build the binaries.
 ```
 cd src
 cmake .
-cmake --build .
-sudo cmake --build . --target install
+make
 ```
 
 ## Test
+Run the test script from the top level directory. Binaries are in the src directory.
+Test output will be in output/tests
 ```
 ./test.sh
 ```
 
 ## Parameters
 ```
-Version: Signal Server 3.22 (Built for 100 DEM tiles at 1200 pixels)
+Version: Signal Server 3.3 (Built for 100 DEM tiles at 1200 pixels)
 License: GNU General Public License (GPL) version 2
 
 Radio propagation simulator by Alex Farrant QCVS, 2E0TDW

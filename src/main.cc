@@ -1,4 +1,4 @@
-double version = 3.21;
+double version = 3.3;
 /****************************************************************************\
 *  Signal Server: Radio propagation simulator by Alex Farrant QCVS, 2E0TDW   *
 ******************************************************************************
@@ -1956,13 +1956,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if (max_range > 100 || LR.frq_mhz == 446.446) {  // Huh?
-		cropping=false;
-	}
-
 	if (ppa == 0) {
-	  if (propmodel == 2) {  // Modl 2 = LOS
-			cropping = false;
+	  if (propmodel == 2) {  // Model 2 = LOS
+			cropping = false; // TODO: File is written in DoLOS() so this needs moving to PlotPropagation() to allow styling, cropping etc
 			PlotLOSMap(tx_site[0], altitudeLR, ano_filename, use_threads);
 			DoLOS(mapfile, geo, kml, ngs, tx_site, txsites);
 		} else {
@@ -1974,15 +1970,6 @@ int main(int argc, char *argv[])
 				fflush(stderr);
 			}	
 
-			// nearfield void
-
-			for (float x=-0.001; x<0.001;x=x+0.0001){
-			        for (float y=-0.001; y<0.001;y=y+0.0001){
-				        if(GetSignal(tx_site[0].lat+y, tx_site[0].lon+x)<=0) {
-					        PutSignal(tx_site[0].lat+y, tx_site[0].lon+x, hottest);
-					}
-				}
-			}
 
 			if (cropping) {
 				// CROPPING Factor determined in propPathLoss().
