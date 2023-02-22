@@ -10,8 +10,16 @@ RUN apt-get update && apt-get install -y \
   libbz2-dev \
   libz-dev \
   && rm -rf /var/lib/apt/lists/*
+RUN mkdir -p $INSTALL_PATH/utils
+WORKDIR $INSTALL_PATH/utils
+ADD utils .
+RUN cd sdf/usgs2sdf && cmake .
+RUN cd sdf/usgs2sdf && make
 
+RUN mkdir -p $INSTALL_PATH/src
+WORKDIR $INSTALL_PATH/src
 ADD src .
 RUN cmake .
 RUN make
-ENTRYPOINT ["./signalserver"]
+
+ENTRYPOINT ["./src/signalserver"]

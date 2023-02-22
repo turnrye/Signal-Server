@@ -13,6 +13,17 @@ For detailed information and historical reference data related to this project s
 
 WARNING: The accuracy of the output is directly proportional to the accuracy of the inputs and the time taken defining and validating them. 
 
+## Quickstart with Docker
+
+```
+docker run --entrypoint ../utils/sdf/usgs2sdf/srtm2sdf signal-server
+```
+
+To run the utilities for converting srtm data, try a command like this:
+
+```
+docker run -v /Users/turnrye/srtm:/srtm -v /Users/turnrye/sdf:/sdf --entrypoint /bin/bash signal-server -c 'cd /sdf && (for i in /srtm/*; do /signal-server/utils/sdf/usgs2sdf/srtm2sdf $i; done)'
+```
 
 ## Requirements
 * C++14-conformant C++ compiler (GCC,G++ / clang)
