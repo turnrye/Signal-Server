@@ -1,12 +1,11 @@
 name: ci
 
-on:
-  push:
-    branches:
-      - 'master'
-
+on: [push]
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 jobs:
-  docker:
+  build-branch:
     runs-on: ubuntu-latest
     steps:
       -
