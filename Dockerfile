@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
   imagemagick \
   libbz2-dev \
   libz-dev \
+  python2 \
   && rm -rf /var/lib/apt/lists/*
 RUN mkdir -p $INSTALL_PATH/utils
 WORKDIR $INSTALL_PATH/utils
@@ -22,4 +23,4 @@ ADD src .
 RUN cmake .
 RUN make
 
-ENTRYPOINT ["./src/signalserver"]
+ENTRYPOINT ["./signalserver"]
